@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="physics solutions">
+    <meta name="author" content="Kamil Uchnast">
+    {% load staticfiles %}
+    <link rel="icon" href="{% static "main_app/favicon.ico" %}">
+    <title>Physics</title>
+    <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="http://getbootstrap.com/assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+    <link href="main.css" rel="stylesheet">
+  </head>
+  <body>
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="{% url 'main_app:main' %}">Physics</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <form class="navbar-form navbar-right" action="{% url 'main_app:login' %}" method="post">
+            {% csrf_token %}
+            <div class="form-group">
+              <input id="email" name="email" type="text" placeholder="Email" class="form-control">
+            </div>
+            <div class="form-group">
+              <input id = "password" name ="password" type="password" placeholder="Password" class="form-control">
+            </div>
+            <button type="submit" class="btn btn-success">Sign in</button>
+            <a href="{% url 'main_app:register' %}" class="btn btn-info" role="button">Register</a>
+          </form>
+          
+        </div>
+        
+      </div>
+    </nav>
+    <div class="jumbotron">
+      <div class="container">
+        <h1>Welcome!</h1>
+        <p>This website contains interacitve solutions for exercises from book: "Fundamentals of Physics".</p>
+        <p><a class="btn btn-primary btn-lg" href="" role="button">Show content&raquo;</a></p>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4">
+          <h2>Chapter 1</h2>
+          <p></p>
+          <p><a class="btn btn-default" href="" role="button">View details &raquo;</a></p>
+        </div>
+        <div class="col-md-4">
+          <h2>Chapter 2</h2>
+          <p></p>
+          <p><a class="btn btn-default" href="" role="button">View details &raquo;</a></p>
+       </div>
+        <div class="col-md-4">
+          <h2>Chapter 3</h2>
+          <p></p>
+          <p><a class="btn btn-default" href="" role="button">View details &raquo;</a></p>
+        </div>
+      </div>
+      <hr>
+      <footer>
+        <p>&copy; 2016 Kamil Uchnast</p>
+      </footer>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="http://getbootstrap.com/assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="http://getbootstrap.com/dist/js/bootstrap.min.js"></script>
+    <script src="http://getbootstrap.com/assets/js/ie10-viewport-bug-workaround.js"></script>
+  </body>
+</html>
