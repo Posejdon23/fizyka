@@ -9,12 +9,11 @@
     {% load staticfiles %}
     <link rel="icon" href="{% static "main_app/favicon.ico" %}">
     <title>Physics</title>
-    <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{% static "main_app/bootstrap.css" %}" rel="stylesheet" />
+    <link href="{% static "main_app/login.css" %}" rel="stylesheet" />
     <link href="http://getbootstrap.com/assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
-    <link href="main.css" rel="stylesheet">
   </head>
   <body>
-
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
@@ -28,20 +27,23 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
         </div>
-        
       </div>
-    </nav>
-    <form action="{% url 'main_app:register' %}" method="post"
-            class="form-horizontal">
+    </nav>  
+  <div class="container">
+  <h2 style="margin-top:100px">Login Form</h2>
+    <div class="row">
+        <form action="{% url 'main_app:login' %}" method="post" class=" col-sm-6 col-md-6 col-xs-6 form-horizontal" style="margin-left:50px">
             {% csrf_token %} 
-            {{ login_form }} 
-            <input type="submit" value="Submit" />
-            </form>
+            {{ login_form.as_p }} 
+            <input type="submit" value="Log In"  class="btn btn-info" style="role="button"/>
+        </form>
+        Don`t have an account? <a href="{% url 'main_app:register' %}" class="btn btn-info"  role="button">Register</a>
+    </div>
+  </div>
       <hr>
       <footer>
         <p>&copy; 2016 Kamil Uchnast</p>
       </footer>
-    </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="http://getbootstrap.com/assets/js/vendor/jquery.min.js"><\/script>')</script>
     <script src="http://getbootstrap.com/dist/js/bootstrap.min.js"></script>

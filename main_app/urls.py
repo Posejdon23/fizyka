@@ -1,11 +1,13 @@
 from django.conf.urls import url
-from main_app.views import MainView
-
+from django.contrib.auth import views as auth_views
 from . import views
 
 app_name = "main_app"
 urlpatterns = [
-    url(r'^$', MainView.as_view(), name = 'main'),
+    url(r'^$', views.main, name = 'main'),
     url(r'^register/$', views.register, name = 'register'),
-    url(r'^login/$', views.log_me_in, name = 'login'),
+    url(r'^login/$', views.logme, name = 'login'),
+    url(r'^login/$', auth_views.login),
+    url(r'^logout/$', views.logoutme, name = 'logout'),
+    url(r'^chapter_list/$', views.chapter_list, name = 'chapter_list'),
 ]

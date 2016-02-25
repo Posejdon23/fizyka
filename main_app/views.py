@@ -1,47 +1,86 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views import generic
-from django.views.generic import TemplateView
+from django.core.urlresolvers import reverse
+from django.http import HttpResponse, HttpResponseRedirect
 from .forms import RegisterForm, LoginForm
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 
-class MainView(TemplateView):
-    template_name = "main.html"
+
+def main(request):
+    if request.method == "POST":
+        login_form = LoginForm(request.POST)
+        if login_form.is_valid():   
+            username = login_form.cleaned_data['username']
+            password = login_form.cleaned_data['password']
+            user = authenticate(username = username, password = password)
+            if user is not None:
+                if user.is_active:
+                    login(request, user)
+                    return render(request,"main.html")
+                else:
+                    return HttpResponse("You account has been blocked")
+            else:
+                return render(request,"main.html",{'login_form': login_form})
+        else:
+            return render(request,"login.html",{'login_form': login_form})
+    else:
+        login_form = LoginForm()
+    return render(request,"main.html",{'login_form': login_form})
 
 
 def register(request):
     if request.method == "POST":
-        form = RegisterForm(request.POST)
-        if form.is_valid():
-            username = form.cleaned_data['username']
-            email = form.cleaned_data['email']
-            password = form.cleaned_data['password']
+        register_form = RegisterForm(request.POST)
+        if register_form.is_valid():
+            username = register_form.cleaned_data['username']
+            email = register_form.cleaned_data['email']
+            password = register_form.cleaned_data['password']
             user = User.objects.create_user(username, email, password)
-            return render(request,"login.html")
+            login_form = LoginForm(initial={"username": username})
+            return render(request,"login.html",{'login_form': login_form})
     else:
-        form = RegisterForm()
-    return render(request,"register.html",{'register_form': form})
+        register_form = RegisterForm()
+    return render(request,"register.html",{'register_form': register_form})
 
 
-def log_me_in(request):
-    if request.method == "POST":
-        username = request.POST['username']
-        password = request.POST['password']
-        form = LoginForm(request.POST)
-        user = authenticate(username=username, password=password)
-        if user is not None:
-            if user.is_active:
-                login(request, user)
-                return render(request,"main.html")
+def logme(request):
+    if request.GET:
+        next = request.GET['next']
+        print(next)
+    if request.POST:
+        next = ""
+        split_referer = request.META['HTTP_REFERER'].split("next=")
+        if len(split_referer) == 2:
+            next = split_referer[1]  
+        login_form = LoginForm(request.POST)
+        if login_form.is_valid():
+            username = login_form.cleaned_data['username']
+            password = login_form.cleaned_data['password']
+            user = authenticate(username = username, password = password)
+            if user is not None:
+                if user.is_active:
+                    login(request, user)
+                    if next == "":
+                        return HttpResponseRedirect('/main_app')
+                    else:
+                        return HttpResponseRedirect(next)
+                else:
+                    return HttpResponse("You account has been blocked")
             else:
-                return HttpResponse("You account has been blocked")
+                return render(request,"login.html",{'login_form': login_form})
         else:
-            return render(request,"login",{'login_form': form})
+            return render(request,"login.html",{'login_form': login_form})
     else:
-        form = LoginForm()
-    return render(request,"login",{'login_form': form})
+        login_form = LoginForm()
+    return render(request,"login.html",{'login_form': login_form})
 
-@login_required
-def logout(request):
+    
+def logoutme(request):
     logout(request)
+    return HttpResponseRedirect('/main_app')
+    
+@login_required
+def chapter_list(request):
+    return render(request,"chapter_list.html")
