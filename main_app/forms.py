@@ -1,12 +1,12 @@
 from django import forms
 
 class RegisterForm(forms.Form):
-    username = forms.CharField(label="User Name", max_length=100)
-    email = forms.EmailField (label="Email")
-    password = forms.CharField(max_length=32, min_length = 6, widget=forms.PasswordInput)
+    username = forms.CharField(label="User Name", max_length=100, help_text="", required=True)
+    email = forms.EmailField (label="Email", required=True)
+    password = forms.CharField(max_length=32, min_length = 6, 
+            widget=forms.PasswordInput, required=True)
     
 
 class LoginForm(forms.Form):
     username = forms.CharField (label="User Name")
     password = forms.CharField(max_length=32, min_length = 6, widget=forms.PasswordInput)
-    

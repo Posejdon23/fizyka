@@ -29,17 +29,22 @@
         </div>
       </div>
     </nav>  
+  
   <div class="container">
-  <h2 style="margin-top:100px">Login Form</h2>
-    <div class="row">
-        <form action="{% url 'main_app:login' %}" method="post" class=" col-sm-6 col-md-6 col-xs-6 form-horizontal" style="margin-left:50px">
-            {% csrf_token %} 
-            {{ login_form.as_p }} 
-            <input type="submit" value="Log In"  class="btn btn-info" style="role="button"/>
-        </form>
-        Don`t have an account? <a href="{% url 'main_app:register' %}" class="btn btn-info"  role="button">Register</a>
-    </div>
+        <h2 style="margin-top:100px">Login Form</h2>
+        <div class="row">
+                <div class="column">
+                        <form action="{% url 'main_app:login' %}" method="post" class=" col-sm-8 col-md-8 col-xs-12 col-lg-8 form-horizontal" style="margin-left:50px;margin-bottom:50px">
+                        {% csrf_token %} 
+                        <label class="errorlist">{{ error_message }}</label>
+                        {{ login_form.as_p }} 
+                        <input type="submit" value="Log In"  class="btn btn-info"       style="role="button"/>
+                        </form>
+                        Don`t have an account? <a href="{% url 'main_app:register' %}" class="btn btn-info"  role="button">Register</a>
+                </div>
+        </div>
   </div>
+  
       <hr>
       <footer>
         <p>&copy; 2016 Kamil Uchnast</p>

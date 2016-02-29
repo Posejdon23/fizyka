@@ -20,13 +20,14 @@
       aria-controls="navbar">
         <span class="sr-only">Toggle navigation</span>
       </button> 
-      <a class="navbar-brand" href="{% url 'main_app:main' %}">Physics</a></div>
+      <a class="navbar-brand" href="/main_app/">Physics</a>
+    </div>
       <div id="navbar" class="navbar-collapse collapse" >
         
         {% if user.is_authenticated %}
             <label>Hello, {{ user.username }}</label>
             <a href="{% url 'main_app:logout' %}" class="btn btn-info"
-            style="role="button">Logout</a>
+            role="button">Logout</a>
         {% endif %}
         
         {% if not user.is_authenticated %}
@@ -34,17 +35,17 @@
         <input type="submit" value="Log In" class="btn btn-info" style="role="button" /> 
         </form>
         <a href="{% url 'main_app:register' %}" class="btn btn-info"
-        style="role="button">Register</a>
+        role="button">Register</a>
         {% endif %}
       </div>
     </div>
   </nav>
   <div class="jumbotron">
-    <div class="container" style="margin-top:20px">
-      <h1>Welcome!</h1>
+    <div class="container" style="margin-top:20px;">
+      <h1 style="text-align: center">Welcome!</h1>
       <p>This website contains interacitve solutions for exercises from book: "Fundamentals of Physics".</p>
       <p>
-        <a class="btn btn-primary btn-lg" href="{% url 'main_app:chapter_list' %}" role="button">Show content</a>
+        <a class="btn btn-primary btn-lg" href="{% url 'main_app:volume_list' %}" role="button" style="vertical-align: middle">Show content</a>
       </p>
     </div>
   </div>

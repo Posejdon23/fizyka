@@ -1,17 +1,30 @@
 from __future__ import unicode_literals
 from django.db import models
+from django.core.validators import MinValueValidator, MaxValueValidator
 
-##Change your models here.
-##Run python manage.py makemigrations to create migrations for those changes
-##Run python manage.py migrate to apply those changes to the database.
-
-class Question(models.Model):
-    question_text = models.CharField(max_length=200)
-    pub_date = models.DateTimeField('date published')
+class Volume(models.Model):
     def __str__(self):
-        return self.question_text
+        return str(self.id)  
 
-class Choice(models.Model):
-    question = models.ForeignKey(Question, on_delete=models.CASCADE)
-    choice_text = models.CharField(max_length=200)
-    votes = models.IntegerField(default=0)
+class Chapter(models.Model):
+    title = models.CharField(max_length=200)
+    desc = models.CharField(max_length=2000)
+    volume = models.ForeignKey(Volume, on_delete=models.CASCADE)
+    def __str__(self):
+        return str(self.title.encode('utf-8'))
+
+
+class Exercise(models.Model):
+    chapter = models.ForeignKey(Chapter, on_delete=models.CASCADE)
+    content = models.CharField(max_length=2000)
+    difficulty_level = models.IntegerField(default=0, validators=[MinValueValidator(1),
+       MaxValueValidator(10)])
+    def __str__(self):
+        return str(self.id)
+
+
+class Solution(models.Model):
+    excercise = models.ForeignKey(Exercise, on_delete=models.CASCADE)
+    content = models.CharField(max_length=2000)
+    def __str__(self):
+        return str(self.id)
