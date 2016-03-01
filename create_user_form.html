@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="physics solutions" />
+    <meta name="author" content="Kamil Uchnast" />
+    <title>Physics</title>
+  </head>
+  <body>{% load staticfiles %}
+  <link rel="icon" href="{% static" />
+  <link href="{% static "main_app/register.css" %}" rel="stylesheet" />
+  <link href="{% static "main_app/bootstrap.css" %}" rel="stylesheet" />
+  <link href="http://getbootstrap.com/assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet" />
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+      aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+      </button> 
+      <a class="navbar-brand" href="/main_app/">Physics</a>
+    </div>
+      <div id="navbar" class="navbar-collapse collapse" >
+        
+        {% if user.is_authenticated %}
+            <label>Hello, {{ user.username }}</label>
+            <a href="{% url 'main_app:logout' %}" class="btn btn-info"
+            role="button">Logout</a>
+        {% endif %}
+      
+      </div>
+    </div>
+  </nav>
+  <form style="margin-top:100px" action="{% url 'main_app:create_user' %}" method="post">{% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Register" class="btn btn-info" style="role="button"/>
+        </form>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="http://getbootstrap.com/assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="http://getbootstrap.com/dist/js/bootstrap.min.js"></script>
+    <script src="http://getbootstrap.com/assets/js/ie10-viewport-bug-workaround.js"></script>
+  </body>
+</html>
+

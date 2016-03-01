@@ -1,0 +1,67 @@
+input{
+    width: 80px
+}
+
+#id_username, #id_password{
+    color: #222;
+}
+
+nav ul ul {
+	display: none;
+    background: #222; padding: 0;
+	position: absolute; top: 100%;
+}
+
+nav ul li:hover > ul {
+    display: block;
+}
+
+nav ul { 
+	list-style: none;
+	position: relative;
+}
+
+nav ul:after {
+    content: ""; clear: both; display: block;
+}
+
+nav ul li:hover {
+    background: #222;
+}
+
+nav ul li:hover a {
+    color: #fff;
+}
+	
+nav ul li a {
+    display: block; padding: 15px 10px;
+}
+
+nav ul ul li {
+    float: none; 
+    position: relative;
+}
+
+nav ul ul li a {
+    padding: 10px 10px;
+    color: #fff;
+}	
+
+nav ul ul li a:hover {
+    background: #222;
+}
+
+nav ul ul ul {
+	position: absolute; left: 100%; top:0;
+}
+
+
+
+
+
+
+
+
+
+
+

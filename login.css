@@ -1,0 +1,11 @@
+.errorlist{
+    color: #f00;
+    font-size: 20;
+    font-weight: bold;
+}
+
+div {
+    display: table-cell;
+    vertical-align: left;
+    height: 50px;
+}
