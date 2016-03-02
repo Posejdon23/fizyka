@@ -10,49 +10,74 @@
   </head>
   <body>{% load staticfiles %}
   <link rel="icon" href="{% static" />
-  <link href="{% static "main_app/main.css" %}" rel="stylesheet" />
   <link href="{% static "main_app/bootstrap.css" %}" rel="stylesheet" />
-  <link href="http://getbootstrap.com/assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet" />
-  <nav class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container">
-      <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false"
-      aria-controls="navbar">
-        <span class="sr-only">Toggle navigation</span>
-      </button> 
-      <a class="navbar-brand" href="/main_app/">Physics</a>
-    </div>
-      <div id="navbar" class="navbar-collapse collapse" >
+  <link href="{% static "main_app/main.css" %}" rel="stylesheet" />
+  
+      <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/main_app/" >Physics</a>
+        </div>
         
+        <div id="navbar" class="navbar-collapse collapse">
         {% if user.is_authenticated %}
-            <label>Hello, {{ user.username }}</label>
-            <a href="{% url 'main_app:logout' %}" class="btn btn-info"
-            role="button">Logout</a>
+            <ul class="navbar-form navbar-right">
+                <li>
+                    <label class="username" style="font-size:large; color:#fff; margin-right:20px; margin-top:5px"> {{ user.username }} &#x25BD;</label>
+                    <ul>
+                        <li>
+                            <a href="{% url 'main_app:profile' %}" role="button">
+                            User profile</a>
+                        </li>
+                        
+                        <li>
+                            <a href="{% url 'main_app:logout' %}" class="logout" role="button">
+                            Logout</a>
+                        </li>
+                    </ul>
+                </li>
+             </ul>
+        </div>
         {% endif %}
         
         {% if not user.is_authenticated %}
-        <form action="{% url 'main_app:login' %}" method="post" class="form-horizontal" style="margin-top:10px" >{% csrf_token %} {{ login_form }} 
-        <input type="submit" value="Log In" class="btn btn-info" style="role="button" /> 
-        </form>
-        <a href="{% url 'main_app:register' %}" class="btn btn-info"
+        <form action="{% url 'main_app:login' %}" method="post" class="navbar-form navbar-right form-horizontal" style="margin-top:10px; color:#fff;" >
+        {% csrf_token %}
+        {{ login_form }} 
+        <input type="submit" value="Log In" class="btn btn-success" style="margin-right:10px"role="button" /> 
+         <a href="{% url 'main_app:register' %}" class="btn btn-info navbar-right"
         role="button">Register</a>
+        </form>
+       
         {% endif %}
+        </div>
       </div>
-    </div>
-  </nav>
+    </nav>
+  
+  
+  
   <div class="jumbotron">
     <div class="container" style="margin-top:20px;">
       <h1 style="text-align: center">Welcome!</h1>
       <p>This website contains interacitve solutions for exercises from book: "Fundamentals of Physics".</p>
       <p>
-        <a class="btn btn-primary btn-lg" href="{% url 'main_app:volume_list' %}" role="button" style="vertical-align: middle">Show content</a>
+        <a class="btn btn-primary btn-lg" href="{% url 'main_app:volumes' %}" role="button" style="vertical-align: middle">Show content</a>
       </p>
+      <video width="640" autoplay loop>
+      <source src="http://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+      </video>
     </div>
   </div>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script>window.jQuery || document.write('<script src="http://getbootstrap.com/assets/js/vendor/jquery.min.js"><\/script>')</script>
-    <script src="http://getbootstrap.com/dist/js/bootstrap.min.js"></script>
-    <script src="http://getbootstrap.com/assets/js/ie10-viewport-bug-workaround.js"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="../../dist/js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
   </body>
 </html>
 

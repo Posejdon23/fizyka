@@ -3,9 +3,67 @@
     font-size: 20;
     font-weight: bold;
 }
+.spaced{
+    margin-top:100px;
+}
+.with-border{
+    border-style:ridge;
+    background-color: #d9d5cd;
+    border-radius: 20px;
+}
 
-div {
-    display: table-cell;
-    vertical-align: center;
-    height: 50px;
+*{
+    #border: 1px solid
+}
+
+label{
+    width: 100px
+}
+
+input {
+	background-color: rgba(255,255,255,0.3);
+	height: 30px;
+	padding: 20px;
+	border-radius: 20px;
+	margin: 5px auto
+}
+input input[type="text"] {
+	width: 210px;
+	padding: 6px;
+	background-color: #f2ede4;
+	border: 1px solid #ddd;
+	border-radius: 4px;
+	float: left;
+	font-family: 'Cookie', serif;
+	font-size: 18px;
+}
+
+input a {
+	float: left;
+	background-color: #418e7b;
+	color: #f2ede4;
+    margin: 15px auto;
+	width: 30px;
+	height: 15px;
+	border: none;
+	border-radius: 50%;
+	margin-left: 5px;
+	text-align: center;
+	line-height: 30px;
+	cursor: pointer;
+	font-family: 'Unlock', Arial, sans-serif;
+}
+input a:hover {
+	background-color: #ffe;
+	color: #418e7b;
+}
+
+input:focus, textarea:focus {
+    outline: none;
+}
+
+.btn{
+    height: 40px;
+    width: 100px;
+    margin: 5px auto
 }
